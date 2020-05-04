@@ -24,18 +24,20 @@ abstract class ModelArgo2i implements AlgorithmInterface
      */
     public function getOptions(): array
     {
-        $keys = [
-            ($this->getMemoryCost() == null ? $keys[0] = null : $keys[0] = 'memory_cost'),
-            ($this->getTimeCost() == null ? $keys[1] = null : $keys[1] = 'time_cost'),
-            ($this->getThreads() == null ? $keys[2] = null : $keys[2] = 'threads'),
-        ];
+        $options = [];
 
-        $values = [
-            ($keys[0] == null ? $values[0] = null : $values[0] = $this->getMemoryCost()),
-            ($keys[1] == null ? $values[1] = null : $values[1] = $this->getTimeCost()),
-            ($keys[2] == null ? $values[2] = null : $values[2] = $this->getThreads()),
-        ];
-        $options = array_combine( $keys ,$values );
+        if ($this->getMemoryCost()) {
+            $options['memory_cost'] = $this->getMemoryCost();
+        }
+
+        if ($this->getTimeCost()) {
+            $options['time_cost'] = $this->getTimeCost();
+        }
+
+        if ($this->getThreads()) {
+            $options['threads'] = $this->getThreads();
+        }
+
         return $options;
     }
 

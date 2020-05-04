@@ -28,16 +28,13 @@ class Bcrypt implements AlgorithmInterface
      */
     public function getOptions(): array
     {
-        $keys = [
-            ($this->getSalt() == null ? $keys[0] = null : $keys[0] = 'salt'),
-            ($this->getCost() == null ? $keys[1] = null : $keys[1] = 'cost'),
-        ];
-
-        $values = [
-            ($keys[0] == null ? $values[0] = null : $values[0] = $this->getSalt()),
-            ($keys[1] == null ? $values[1] = null : $values[1] = $this->getCost()),
-        ];
-        $options = array_combine( $keys ,$values );
+        $options = [];
+        if ($this->getSalt()) {
+            $options['salt'] = $this->getSalt();
+        }
+        if ($this->getCost()) {
+            $options['cost'] = $this->getCost();
+        }
         return $options;
     }
 
